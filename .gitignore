@@ -1,0 +1,18 @@
+# Archivos generados al compilar
+bin/
+obj/
+
+#Librerias
+wwwroot/lib/
+
+# Configuración interna de Visual Studio
+.vs/
+
+# Configuración local de VS Code
+.vscode/
+
+# Configuración local con la contraseña de la base de datos
+appsettings.Development.json
+
+# Resultados de pruebas
+TestResults/

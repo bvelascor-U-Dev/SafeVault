@@ -1,0 +1,16 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<form method="post" asp-page-handler="Login">
+    <div asp-validation-summary="All"></div>
+    <label asp-for="login.Email">Email:</label>
+    <input type="text" asp-for="login.Email">
+    
+    <label asp-for="login.Password">Password:</label>
+    <input type="password" asp-for="login.Password">
+    
+    <button type="submit">Login</button>
+</form>

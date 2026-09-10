@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form method="post" asp-page-handler="Submit">
+    <div asp-validation-summary="All"></div>
+    <label asp-for="user.Name">Username:</label>
+    <input type="text" asp-for="user.Name">
+    
+    <label asp-for="user.Email">Email:</label>
+    <input type="email" asp-for="user.Email">
+    
+    <button type="submit">Submit</button>
+</form>
