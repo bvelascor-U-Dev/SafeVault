@@ -34,7 +34,7 @@ public class IndexModel : PageModel
 
         try
         {
-            _dbContext.Users.Add(new User { Name = username, Email = email, PasswordHash = password, EncryptedPrivateNote = privateNote });
+            _dbContext.Users.Add(new User { Name = username, Email = email, PasswordHash = password, EncryptedPrivateNote = privateNote, Role = "User" });
             _dbContext.SaveChanges();
         }
         catch (Exception)

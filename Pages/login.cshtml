@@ -14,3 +14,10 @@
     
     <button type="submit">Login</button>
 </form>
+
+@if (!string.IsNullOrWhiteSpace(Model.InformationMessage))
+{
+    <div class="alert alert-info">
+        @Model.InformationMessage
+    </div>
+}
