@@ -6,13 +6,15 @@ namespace SafeVault.Pages;
 public class IndexModel : PageModel
 {
     public readonly SafeValueDbContext _dbContext;
-    public IndexModel(SafeValueDbContext dbContext)
+    private readonly EncryptionService _encryptionService;
+    public IndexModel(SafeValueDbContext dbContext, EncryptionService encryptionService)
     {
         _dbContext = dbContext;
+        _encryptionService = encryptionService;
     }
 
     [BindProperty]
-    public User user { get; set; } = new();
+    public RegisterUser registerUser { get; set; } = new();
 
     public void OnGet()
     {
@@ -25,12 +27,14 @@ public class IndexModel : PageModel
             return Page();
         }
 
-        string username = user.Name;
-        string email = user.Email;
+        string username = registerUser.Name;
+        string email = registerUser.Email;
+        string password = BCrypt.Net.BCrypt.HashPassword(registerUser.PasswordHash);
+        string? privateNote = registerUser.PrivateNote != null ? _encryptionService.Encrypt(registerUser.PrivateNote) : null;
 
         try
         {
-            _dbContext.Users.Add(new User { Name = username, Email = email });
+            _dbContext.Users.Add(new User { Name = username, Email = email, PasswordHash = password, EncryptedPrivateNote = privateNote, Role = "User" });
             _dbContext.SaveChanges();
         }
         catch (Exception)

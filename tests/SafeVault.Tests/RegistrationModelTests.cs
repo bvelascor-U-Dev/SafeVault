@@ -1,75 +1,72 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+
 namespace SafeVault.Tests;
 
-public class UnitTest1
+public class RegistrationModelTests
 {
     [Fact]
-    public void userWithDataValidIsvalid()
-    { 
-        //Arrange
-        var user = new User
+    public void RegisterUserWithValidDataIsValid()
+    {
+        var user = new RegisterUser
         {
             Name = "John Doe",
-            Email = "john.doe@example.com"
+            Email = "john.doe@example.com",
+            PasswordHash = "Password1!"
         };
 
         var validationContext = new ValidationContext(user);
         var validationResults = new List<ValidationResult>();
 
-                // Act: ejecutamos las validaciones del modelo
         bool isValid = Validator.TryValidateObject(
             user,
             validationContext,
             validationResults,
             validateAllProperties: true);
 
-        // Assert: comprobamos el resultado esperado
         Assert.True(isValid);
     }
+
     [Fact]
-    public void UserWithSqlInjectionIsInvalid()
+    public void RegisterUserWithSqlInjectionInNameIsInvalid()
     {
-        // Arrange
-        var user = new User
+        var user = new RegisterUser
         {
             Name = "Pedro'); DROP TABLE Users;--",
-            Email = "pedro@example.com"
+            Email = "pedro@example.com",
+            PasswordHash = "Password1!"
         };
 
         var validationContext = new ValidationContext(user);
         var validationResults = new List<ValidationResult>();
 
-        // Act
         bool isValid = Validator.TryValidateObject(
             user,
             validationContext,
             validationResults,
             validateAllProperties: true);
 
-        // Assert
         Assert.False(isValid);
     }
+
     [Fact]
-    public void UserWithXssScriptIsInvalid()
+    public void RegisterUserWithXssInNameIsInvalid()
     {
-        // Arrange
-        var user = new User
+        var user = new RegisterUser
         {
             Name = "<script>alert('XSS')</script>",
-            Email = "pedro@example.com"
+            Email = "pedro@example.com",
+            PasswordHash = "Password1!"
         };
 
         var validationContext = new ValidationContext(user);
         var validationResults = new List<ValidationResult>();
 
-        // Act
         bool isValid = Validator.TryValidateObject(
             user,
             validationContext,
             validationResults,
             validateAllProperties: true);
 
-        // Assert
         Assert.False(isValid);
     }
 }

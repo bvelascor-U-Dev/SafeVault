@@ -1,0 +1,30 @@
+@page
+@model AdminModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Panel de Administración</h1>
+
+<p>Bienvenido, @Model.NombreUsuario</p>
+<p>Fecha y hora actual: @Model.FechaActual</p>
+
+<form method="post">
+    <div>
+        <label for="Mensaje">Escribe un mensaje:</label>
+        <input type="text" id="Mensaje" name="Mensaje" />
+    </div>
+    <button type="submit">Enviar</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.MensajeRecibido))
+{
+    <p>Mensaje recibido: @Model.MensajeRecibido</p>
+}
+
+<ul>
+    @foreach (var item in Model.Elementos)
+    {
+        <li>@item</li>
+    }
+</ul>

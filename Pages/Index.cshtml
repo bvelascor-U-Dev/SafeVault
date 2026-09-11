@@ -6,11 +6,17 @@
 
 <form method="post" asp-page-handler="Submit">
     <div asp-validation-summary="All"></div>
-    <label asp-for="user.Name">Username:</label>
-    <input type="text" asp-for="user.Name">
+    <label asp-for="registerUser.Name">Username:</label>
+    <input type="text" asp-for="registerUser.Name">
     
-    <label asp-for="user.Email">Email:</label>
-    <input type="email" asp-for="user.Email">
+    <label asp-for="registerUser.Email">Email:</label>
+    <input type="email" asp-for="registerUser.Email">
+
+    <label asp-for="registerUser.PasswordHash">Password:</label>
+    <input type="password" asp-for="registerUser.PasswordHash">
+    
+    <label asp-for="registerUser.PrivateNote">Private Note:</label>
+    <input type="text" asp-for="registerUser.PrivateNote">
     
     <button type="submit">Submit</button>
 </form>

@@ -6,11 +6,18 @@
 
 <form method="post" asp-page-handler="Login">
     <div asp-validation-summary="All"></div>
-    <label asp-for="login.Email">Email:</label>
-    <input type="text" asp-for="login.Email">
+    <label asp-for="LoginUser.Email">Email:</label>
+    <input type="text" asp-for="LoginUser.Email">
     
-    <label asp-for="login.Password">Password:</label>
-    <input type="password" asp-for="login.Password">
+    <label asp-for="LoginUser.Password">Password:</label>
+    <input type="password" asp-for="LoginUser.Password">
     
     <button type="submit">Login</button>
 </form>
+
+@if (!string.IsNullOrWhiteSpace(Model.InformationMessage))
+{
+    <div class="alert alert-info">
+        @Model.InformationMessage
+    </div>
+}

@@ -1,0 +1,20 @@
+@page
+@model MembersModel
+@{
+    ViewData["Title"] = "Members";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome, @User.Identity?.Name!</h1>
+    <p>This area is accessible only to registered members.</p>
+
+    @if (!string.IsNullOrWhiteSpace(Model.DecryptedPrivateNote))
+    {
+        <p>Your private note:</p>
+        <p>@Model.DecryptedPrivateNote</p>
+    }
+    else
+    {
+        <p>You don't have a private note.</p>
+    }
+</div>
