@@ -37,7 +37,7 @@ public class LoginModel : PageModel
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                return RedirectToPage("/Privacy");
+                return RedirectToPage("/Members");
             }
             else
             {
@@ -50,10 +50,5 @@ public class LoginModel : PageModel
             ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
             return Page();
         }
-
-
-
-
-        return RedirectToPage("/Index");
     }
 }
